@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("com.fluxninja.aperture:aperture-java:0.3.0-20221114.125015-30")
 }
 
 tasks.test {

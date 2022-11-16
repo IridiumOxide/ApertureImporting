@@ -1,7 +1,17 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import com.fluxninja.aperture.sdk.ApertureSDK
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main(args: Array<String>) {
+
+    val sdk = ApertureSDK.builder()
+        .setHost("localhost")
+        .setPort(8089)
+        .build()
+
+    val flow = sdk.startFlow("someFeature", mapOf())
+    val text = "Hello World!"
+    if (flow.accepted()) {
+        println(text.lowercase())
+    } else {
+        println(text.uppercase())
+    }
 }
