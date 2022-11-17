@@ -10,13 +10,20 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
-    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
-    maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
+    mavenLocal()
+    //maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
+    //maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-    implementation("com.fluxninja.aperture:aperture-java:0.3.0-20221114.125015-30")
+    // a random potentially conflicting dependency to test if shadow jar works
+    implementation("io.opentelemetry:opentelemetry-sdk:1.1.0")
+
+    implementation("com.fluxninja.aperture:aperture-java:0.4.0-SNAPSHOT") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling::class.java, Bundling.SHADOWED))
+        }
+    }
 }
 
 tasks.test {
